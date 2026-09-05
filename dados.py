@@ -11,6 +11,7 @@ def menu():
 2. Ver alunos
 3. Pesquisar alunos
 4. Remover aluno
+5. Média de peso dos alunos
 0. Sair\n"""
 
 
@@ -78,3 +79,9 @@ def remover_aluno(nome_aluno):
             encontrado = True
     if not encontrado:
         print(f"{nome_aluno} não encontrado!")
+
+def media_pesos():
+    pesos = [aluno['peso'] for aluno in alunos]
+    media = sum(pesos) / len(pesos)
+    print(f"Peso médio dos alunos: {media:.2f}")
+    input("Pressione qualquer tecla para voltar...")

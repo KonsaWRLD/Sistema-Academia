@@ -15,18 +15,20 @@ def main():
                 dados.criar_aluno(nome, altura, peso)
             elif opcao == 2:
                 dados.ver_alunos()
-                input("Pressione qualquer tecla para voltar...")
             elif opcao == 3:
                 pesquisa = input("Informe o nome do aluno: ").upper()
                 dados.pesquisar_aluno(pesquisa)
             elif opcao == 4:
                 pesquisa = input("Informe o nome do aluno: ").upper()
                 dados.remover_aluno(pesquisa)
+            elif opcao == 5:
+                dados.media_pesos()
             elif opcao == 0:
                 print("Saindo...")
                 break
         except Exception as erro:
             print(erro)
+            input("Pressione qualquer tecla para voltar...")
 
 
 if __name__ == "__main__":
