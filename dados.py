@@ -80,8 +80,9 @@ def remover_aluno(nome_aluno):
     if not encontrado:
         print(f"{nome_aluno} não encontrado!")
 
+
 def media_pesos():
-    pesos = [aluno['peso'] for aluno in alunos]
+    pesos = [aluno["peso"] for aluno in alunos]
     media = sum(pesos) / len(pesos)
     print(f"Peso médio dos alunos: {media:.2f}")
     input("Pressione qualquer tecla para voltar...")
