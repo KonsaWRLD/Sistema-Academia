@@ -1,4 +1,5 @@
 import calculos
+import utils
 
 alunos = [
     {"nome": "CARLOS", "altura": 1.80, "peso": 80.0, "imc": 24.69, "status": "Normal"},
@@ -6,18 +7,10 @@ alunos = [
 ]
 
 
-def menu():
-    return """1. Cadastrar aluno
-2. Ver alunos
-3. Pesquisar alunos
-4. Remover aluno
-5. Média de peso dos alunos
-0. Sair\n"""
-
-
 def ver_alunos():
     if not alunos:
-        print("Ops! Sem alunos cadastrados no momento.")
+        print("Ops! Sem alunos cadastrados no momento.\n")
+        utils.pausar()
         return
     for aluno in alunos:
         print(
@@ -26,22 +19,9 @@ def ver_alunos():
     input("Pressione qualquer tecla para voltar...")
 
 
-def status(imc):
-    if imc < 18.5:
-        return "Magreza"
-    elif 18.5 <= imc <= 24.9:
-        return "Normal"
-    elif 25 <= imc <= 29.9:
-        return "Sobrepeso"
-    elif 30 <= imc <= 39.9:
-        return "Obesidade"
-    else:
-        return "Obesidade Grave"
-
-
 def criar_aluno(nome, altura, peso):
     imc = calculos.calcular_imc(peso, altura)
-    nivel = status(imc)
+    nivel = utils.status(imc)
     novo_aluno = {
         "nome": nome,
         "altura": altura,
@@ -50,8 +30,8 @@ def criar_aluno(nome, altura, peso):
         "status": nivel,
     }
     alunos.append(novo_aluno)
-
-    print(f"{nome} foi adicionado(a) com sucesso!")
+    print(f"{nome} foi adicionado(a) com sucesso!\n")
+    utils.pausar()
     input("Pressione qualquer tecla para voltar...")
 
 
@@ -66,7 +46,8 @@ def pesquisar_aluno(nome_aluno):
             encontrado = True
             break
     if encontrado == False:
-        print(f"{nome_aluno} não encontrado!")
+        print(f"{nome_aluno} não encontrado!\n")
+        utils.pausar()
 
 
 def remover_aluno(nome_aluno):
@@ -74,15 +55,23 @@ def remover_aluno(nome_aluno):
     for aluno in alunos:
         if nome_aluno == aluno["nome"]:
             alunos.remove(aluno)
-            print(f"{aluno['nome']} removido com sucesso!")
+            print(f"{aluno['nome']} removido com sucesso!\n")
+            utils.pausar()
             input("Pressione qualquer tecla para voltar...")
             encontrado = True
     if not encontrado:
-        print(f"{nome_aluno} não encontrado!")
+        print(f"{nome_aluno} não encontrado!\n")
+        utils.pausar()
 
 
 def media_pesos():
+    if not alunos:
+        print("Não há alunos para calcular a média.\n")
+        utils.pausar()
+        return
+
     pesos = [aluno["peso"] for aluno in alunos]
     media = sum(pesos) / len(pesos)
-    print(f"Peso médio dos alunos: {media:.2f}")
+    print(f"Peso médio dos alunos: {media:.2f}\n")
+    utils.pausar()
     input("Pressione qualquer tecla para voltar...")
