@@ -1,17 +1,55 @@
 import os
 import time
 
+RESET = "\033[0m"
+CYAN = "\033[96m"
+BLUE = "\033[94m"
+GREEN = "\033[92m"
+YELLOW = "\033[93m"
+RED = "\033[91m"
+WHITE = "\033[97m"
+DIM = "\033[2m"
+
+
+def habilitar_cores():
+    if os.name == "nt":
+        os.system("")
+
+
+def titulo(texto):
+    return f"{CYAN}>>> {texto.upper()} <<<{RESET}"
+
+
+def sucesso(texto):
+    return f"{GREEN}[OK] {texto}{RESET}"
+
+
+def aviso(texto):
+    return f"{YELLOW}[!] {texto}{RESET}"
+
+
+def erro(texto):
+    return f"{RED}[X] {texto}{RESET}"
+
+
+def pausar_com_mensagem():
+    input(f"\n{DIM}Pressione ENTER para voltar...{RESET}")
+
 
 def menu():
     horario = time.strftime("%d/%m/%Y %H:%M:%S")
-    return f"""Sistema de Academia | {horario}
+    return f"""{BLUE}+------------------------------------------+
+|          SISTEMA DE ACADEMIA             |
++------------------------------------------+{RESET}
+{DIM}{horario}{RESET}
 
-1. Cadastrar aluno
-2. Ver alunos
-3. Pesquisar alunos
-4. Remover aluno
-5. Média de peso dos alunos
-0. Sair\n"""
+{WHITE}[1]{RESET} Cadastrar aluno
+{WHITE}[2]{RESET} Ver alunos
+{WHITE}[3]{RESET} Pesquisar aluno
+{WHITE}[4]{RESET} Remover aluno
+{WHITE}[5]{RESET} Media de peso dos alunos
+{RED}[0]{RESET} Sair
+"""
 
 
 def limpar():
@@ -38,7 +76,7 @@ def status(imc):
 def validar_nome(nome):
     nome = nome.strip()
     if nome == "":
-        print("Campo obrigatório!")
+        print(erro("Campo obrigatorio."))
         return False
     else:
         return True
@@ -48,11 +86,11 @@ def validar_numero(valor):
     try:
         valor = float(valor.strip())
     except (AttributeError, ValueError):
-        print("Informe um valor válido!")
+        print(erro("Informe um valor valido."))
         return False
 
     if valor > 0:
         return True
     else:
-        print("Digite um número maior que zero!")
+        print(aviso("Digite um numero maior que zero."))
         return False

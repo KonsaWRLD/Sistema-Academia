@@ -9,14 +9,19 @@ alunos = [
 
 def ver_alunos():
     if not alunos:
-        print("Ops! Sem alunos cadastrados no momento.\n")
+        print(utils.aviso("Nenhum aluno cadastrado no momento.\n"))
         utils.pausar()
         return
     for aluno in alunos:
         print(
-            f"NOME: {aluno['nome']}\nALTURA: {aluno['altura']}\nPESO: {aluno['peso']}\nIMC: {aluno['imc']:.2f}\nSTATUS: {aluno['status']}\n"
+            f"{utils.titulo('Dados do aluno')}\n"
+            f"  Nome   : {aluno['nome']}\n"
+            f"  Altura : {aluno['altura']:.2f} m\n"
+            f"  Peso   : {aluno['peso']:.2f} kg\n"
+            f"  IMC    : {aluno['imc']:.2f}\n"
+            f"  Status : {aluno['status']}\n"
         )
-    input("Pressione qualquer tecla para voltar...")
+    utils.pausar_com_mensagem()
 
 
 def criar_aluno(nome, altura, peso):
@@ -30,9 +35,9 @@ def criar_aluno(nome, altura, peso):
         "status": nivel,
     }
     alunos.append(novo_aluno)
-    print(f"{nome} foi adicionado(a) com sucesso!\n")
+    print(utils.sucesso(f"{nome} foi adicionado(a) com sucesso.\n"))
     utils.pausar()
-    input("Pressione qualquer tecla para voltar...")
+    utils.pausar_com_mensagem()
 
 
 def pesquisar_aluno(nome_aluno):
@@ -40,13 +45,18 @@ def pesquisar_aluno(nome_aluno):
     for aluno in alunos:
         if nome_aluno == aluno["nome"]:
             print(
-                f"NOME: {aluno['nome']}\nALTURA: {aluno['altura']}\nPESO: {aluno['peso']}\nIMC: {aluno['imc']:.2f}\nSTATUS: {aluno['status']}\n"
+                f"{utils.titulo('Aluno encontrado')}\n"
+                f"  Nome   : {aluno['nome']}\n"
+                f"  Altura : {aluno['altura']:.2f} m\n"
+                f"  Peso   : {aluno['peso']:.2f} kg\n"
+                f"  IMC    : {aluno['imc']:.2f}\n"
+                f"  Status : {aluno['status']}\n"
             )
-            input("Pressione qualquer tecla para voltar...")
+            utils.pausar_com_mensagem()
             encontrado = True
             break
     if encontrado == False:
-        print(f"{nome_aluno} não encontrado!\n")
+        print(utils.aviso(f"{nome_aluno} nao encontrado.\n"))
         utils.pausar()
 
 
@@ -55,12 +65,12 @@ def remover_aluno(nome_aluno):
     for aluno in alunos:
         if nome_aluno == aluno["nome"]:
             alunos.remove(aluno)
-            print(f"{aluno['nome']} removido com sucesso!\n")
+            print(utils.sucesso(f"{aluno['nome']} removido com sucesso.\n"))
             utils.pausar()
-            input("Pressione qualquer tecla para voltar...")
+            utils.pausar_com_mensagem()
             encontrado = True
     if not encontrado:
-        print(f"{nome_aluno} não encontrado!\n")
+        print(utils.aviso(f"{nome_aluno} nao encontrado.\n"))
         utils.pausar()
 
 
@@ -72,6 +82,6 @@ def media_pesos():
 
     pesos = [aluno["peso"] for aluno in alunos]
     media = sum(pesos) / len(pesos)
-    print(f"Peso médio dos alunos: {media:.2f}\n")
+    print(utils.sucesso(f"Peso medio dos alunos: {media:.2f} kg\n"))
     utils.pausar()
-    input("Pressione qualquer tecla para voltar...")
+    utils.pausar_com_mensagem()
