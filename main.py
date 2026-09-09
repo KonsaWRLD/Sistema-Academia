@@ -48,18 +48,28 @@ def main():
 
             elif opcao == 3:
                 pesquisa = input(
-                    f"{utils.CYAN}Nome do aluno{utils.RESET} {utils.WHITE}> {utils.RESET}"
+                    f"{utils.CYAN}Nome do aluno para pesquisar{utils.RESET} {utils.WHITE}> {utils.RESET}"
                 ).upper()
                 dados.pesquisar_aluno(pesquisa)
+                utils.pausar_com_mensagem()
 
             elif opcao == 4:
                 pesquisa = input(
-                    f"{utils.CYAN}Nome do aluno{utils.RESET} {utils.WHITE}> {utils.RESET}"
+                    f"{utils.CYAN}Nome do aluno para remover{utils.RESET} {utils.WHITE}> {utils.RESET}"
                 ).upper()
                 dados.remover_aluno(pesquisa)
 
             elif opcao == 5:
                 dados.media_pesos()
+
+            elif opcao == 6:
+                aluno = input("Nome do aluno para editar: ").strip().upper()
+                aluno_encontrado = dados.pesquisar_aluno(aluno)
+                if aluno_encontrado is not None:
+                    print(utils.menu_edicao(aluno))
+                    valor = int(input("Escolha o campo: "))
+                    dados.editar_aluno(aluno, valor)
+                    utils.pausar_com_mensagem()
 
             elif opcao == 0:
                 print(utils.aviso("Saindo..."))

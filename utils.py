@@ -48,6 +48,7 @@ def menu():
 {WHITE}[3]{RESET} Pesquisar aluno
 {WHITE}[4]{RESET} Remover aluno
 {WHITE}[5]{RESET} Media de peso dos alunos
+{WHITE}[6]{RESET} Editar aluno
 {RED}[0]{RESET} Sair
 """
 
@@ -94,3 +95,14 @@ def validar_numero(valor):
     else:
         print(aviso("Digite um numero maior que zero."))
         return False
+
+
+def menu_edicao(aluno):
+    return f"""+------------------------------------------+
+|              EDITAR ALUNO                |
++------------------------------------------+
+Aluno: {aluno}
+{WHITE}[1]{RESET} Nome
+{WHITE}[2]{RESET} Altura
+{WHITE}[3]{RESET} Peso
+"""

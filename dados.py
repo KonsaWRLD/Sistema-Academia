@@ -41,23 +41,20 @@ def criar_aluno(nome, altura, peso):
 
 
 def pesquisar_aluno(nome_aluno):
-    encontrado = False
     for aluno in alunos:
         if nome_aluno == aluno["nome"]:
             print(
-                f"{utils.titulo('Aluno encontrado')}\n"
+                f"{utils.titulo('Resultado da pesquisa')}\n"
                 f"  Nome   : {aluno['nome']}\n"
                 f"  Altura : {aluno['altura']:.2f} m\n"
                 f"  Peso   : {aluno['peso']:.2f} kg\n"
                 f"  IMC    : {aluno['imc']:.2f}\n"
                 f"  Status : {aluno['status']}\n"
             )
-            utils.pausar_com_mensagem()
-            encontrado = True
-            break
-    if encontrado == False:
-        print(utils.aviso(f"{nome_aluno} nao encontrado.\n"))
-        utils.pausar()
+            return aluno
+
+    print(utils.aviso(f"Aluno {nome_aluno} nao encontrado.\n"))
+    return None
 
 
 def remover_aluno(nome_aluno):
@@ -85,3 +82,29 @@ def media_pesos():
     print(utils.sucesso(f"Peso medio dos alunos: {media:.2f} kg\n"))
     utils.pausar()
     utils.pausar_com_mensagem()
+
+
+def editar_aluno(nome_aluno, valor):
+    aluno_encontrado = None
+
+    for aluno in alunos:
+        if aluno["nome"] == nome_aluno:
+            aluno_encontrado = aluno
+            break
+    if valor == 1:
+        chave = "nome"
+    elif valor == 2:
+        chave = "altura"
+    elif valor == 3:
+        chave = "peso"
+    else:
+        chave = None
+
+    if aluno_encontrado is not None and chave is not None:
+        novo_valor = input(f"Novo valor para {chave}: ").strip().upper()
+
+        if chave in ["altura", "peso"]:
+            novo_valor = float(novo_valor.replace(",", "."))
+
+        aluno_encontrado[chave] = novo_valor
+        print(utils.sucesso(f"Dados de {nome_aluno} atualizados com sucesso.\n"))
